@@ -6,7 +6,7 @@ This repository is created for my internship at Friendsware Solutions. It contai
 # Details
 - Company: Friendsware Solutions  
 - Role: Frontend Developer  
-- Student: CodeWithAisha05  
+- Student:Aisha Umar 
 - Start Date: June 2026  
 
 # Tech Stack
