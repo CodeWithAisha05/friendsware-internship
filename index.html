@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Personal Expense Tracker</h1>
+
+    <form id="expenseForm">
+
+        <input type="text" id="title" placeholder="Title">
+        <input type="number" id="amount" placeholder="Amount">
+
+        <select id="category">
+            <option value="">Select Category</option>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Utilities</option>
+            <option>Entertainment</option>
+            <option>Other</option>
+        </select>
+
+        <button type="submit">Add</button>
+
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody id="expenseList"></tbody>
+    </table>
+
+    <h3>Total: PKR <span id="total">0</span></h3>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
