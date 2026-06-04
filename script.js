@@ -1,50 +1,71 @@
 const form = document.getElementById("expenseForm");
+
 const title = document.getElementById("title");
 const amount = document.getElementById("amount");
 const category = document.getElementById("category");
+const customCategory = document.getElementById("customCategory");
 
 const expenseList = document.getElementById("expenseList");
 const totalEl = document.getElementById("total");
 
-// error elements
 const titleError = document.getElementById("titleError");
 const amountError = document.getElementById("amountError");
 const categoryError = document.getElementById("categoryError");
 
 let total = 0;
 
+/* SHOW / HIDE CUSTOM CATEGORY INPUT */
+category.addEventListener("change", function () {
+    if (category.value === "Other") {
+        customCategory.style.display = "block";
+    } else {
+        customCategory.style.display = "none";
+        customCategory.value = "";
+    }
+});
+
+/* FORM SUBMIT */
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     let isValid = true;
 
-    // RESET ERRORS
+    // reset errors
     titleError.innerText = "";
     amountError.innerText = "";
     categoryError.innerText = "";
 
-    // VALIDATION 1: TITLE
+    // VALIDATION - TITLE
     if (title.value.trim() === "") {
         titleError.innerText = "Title is required";
         isValid = false;
     }
 
-    // VALIDATION 2: AMOUNT
+    // VALIDATION - AMOUNT
     if (amount.value === "" || amount.value <= 0) {
         amountError.innerText = "Amount must be a positive number";
         isValid = false;
     }
 
-    // VALIDATION 3: CATEGORY
+    // VALIDATION - CATEGORY
+    let finalCategory = category.value;
+
     if (category.value === "") {
         categoryError.innerText = "Please select a category";
         isValid = false;
     }
 
-    // STOP IF INVALID
-    if (!isValid) {
-        return;
+    // CUSTOM CATEGORY HANDLING
+    if (category.value === "Other") {
+        finalCategory = customCategory.value;
+
+        if (finalCategory.trim() === "") {
+            categoryError.innerText = "Please enter a custom category";
+            isValid = false;
+        }
     }
+
+    if (!isValid) return;
 
     // CREATE ROW
     const row = document.createElement("tr");
@@ -52,8 +73,12 @@ form.addEventListener("submit", function (e) {
     row.innerHTML = `
     <td>${title.value}</td>
     <td>PKR ${Number(amount.value).toLocaleString()}</td>
-    <td>${category.value}</td>
-    <td><button onclick="deleteExpense(this, ${amount.value})">Delete</button></td>
+    <td>${finalCategory}</td>
+    <td>
+      <button onclick="deleteExpense(this, ${amount.value})">
+        Delete
+      </button>
+    </td>
   `;
 
     expenseList.appendChild(row);
@@ -64,9 +89,10 @@ form.addEventListener("submit", function (e) {
 
     // RESET FORM
     form.reset();
+    customCategory.style.display = "none";
 });
 
-// DELETE FUNCTION
+/* DELETE EXPENSE */
 function deleteExpense(btn, amt) {
     btn.parentElement.parentElement.remove();
 
