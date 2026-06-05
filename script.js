@@ -11,6 +11,7 @@ const totalEl = document.getElementById("total");
 const titleError = document.getElementById("titleError");
 const amountError = document.getElementById("amountError");
 const categoryError = document.getElementById("categoryError");
+const filterCategory = document.getElementById("filterCategory");
 
 let total = 0;
 
@@ -70,6 +71,8 @@ form.addEventListener("submit", function (e) {
     // CREATE ROW
     const row = document.createElement("tr");
 
+    row.setAttribute("data-category", finalCategory);
+
     row.innerHTML = `
     <td>${title.value}</td>
     <td>PKR ${Number(amount.value).toLocaleString()}</td>
@@ -99,3 +102,27 @@ function deleteExpense(btn, amt) {
     total -= Number(amt);
     totalEl.innerText = total.toLocaleString();
 }
+/* FILTER FEATURE */
+
+filterCategory.addEventListener("change", function () {
+
+    const selectedCategory = filterCategory.value;
+
+    const rows = expenseList.querySelectorAll("tr");
+
+    rows.forEach(function (row) {
+
+        const rowCategory = row.getAttribute("data-category");
+
+        if (
+            selectedCategory === "All" ||
+            rowCategory === selectedCategory
+        ) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+
+    });
+
+});

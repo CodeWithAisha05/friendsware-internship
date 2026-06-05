@@ -11,20 +11,42 @@
 
     <h1>Personal Expense Tracker</h1>
 
-    <!-- EXPENSE FORM -->
-    <form id="expenseForm">
+        <!-- EXPENSE FORM -->
+        <form id="expenseForm">
 
-        <!-- TITLE -->
-        <input type="text" id="title" placeholder="Title">
-        <div class="error" id="titleError"></div>
+            <!-- TITLE -->
+            <input type="text" id="title" placeholder="Title">
+            <div class="error" id="titleError"></div>
 
-        <!-- AMOUNT -->
-        <input type="number" id="amount" placeholder="Amount">
-        <div class="error" id="amountError"></div>
+            <!-- AMOUNT -->
+            <input type="number" id="amount" placeholder="Amount">
+            <div class="error" id="amountError"></div>
 
-        <!-- CATEGORY -->
-        <select id="category">
-            <option value="">Select Category</option>
+            <!-- CATEGORY -->
+            <select id="category">
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <div class="error" id="categoryError"></div>
+
+            <!-- CUSTOM CATEGORY INPUT -->
+            <input type="text" id="customCategory" placeholder="Enter custom category" style="display:none;">
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit">Add Expense</button>
+
+        </form>
+
+        <hr>
+        <h3>Filter Expenses</h3>
+
+        <select id="filterCategory">
+            <option value="All">All Categories</option>
             <option value="Food">Food</option>
             <option value="Transport">Transport</option>
             <option value="Utilities">Utilities</option>
@@ -32,36 +54,26 @@
             <option value="Other">Other</option>
         </select>
 
-        <div class="error" id="categoryError"></div>
+        <br><br>
 
-        <!-- CUSTOM CATEGORY INPUT -->
-        <input type="text" id="customCategory" placeholder="Enter custom category" style="display:none;">
+        <!-- EXPENSE TABLE -->
+        <table border="1">
 
-        <!-- SUBMIT BUTTON -->
-        <button type="submit">Add Expense</button>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
 
-    </form>
+            <tbody id="expenseList"></tbody>
 
-    <hr>
+        </table>
 
-    <!-- EXPENSE TABLE -->
-    <table border="1">
-
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-
-        <tbody id="expenseList"></tbody>
-
-    </table>
-
-    <!-- TOTAL -->
-    <h3>Total: PKR <span id="total">0</span></h3>
+        <!-- TOTAL -->
+        <h3>Total: PKR <span id="total">0</span></h3>
 
     <!-- JS FILE -->
     <script src="script.js"></script>
